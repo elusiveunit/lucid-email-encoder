@@ -1,0 +1,174 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lucid Email Encoder v2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-03-28 09:46:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: inc/admin.php:80
+#@ leejl
+msgid "Settings"
+msgstr "Inställningar"
+
+#: inc/settings.php:75
+#@ leejl
+msgid "Generate manual encoding"
+msgstr "Generera manuell kodning"
+
+#: inc/admin.php:121
+#@ leejl
+msgid "For more information:"
+msgstr ""
+
+#: inc/admin.php:122
+#@ leejl
+msgid "Documentation on Media Library"
+msgstr ""
+
+#: inc/admin.php:123
+#@ leejl
+msgid "Support Forums"
+msgstr ""
+
+#: inc/settings.php:17
+#: inc/settings.php:20
+#@ leejl
+msgid "Lucid Email Encoder"
+msgstr "Lucid Email Encoder"
+
+#: inc/settings.php:35
+#@ leejl
+msgid "The JavaScript option encodes entire mailto links, in addition to regular email addresses."
+msgstr "JavaScript-valet kodar, förutom vanliga e-postadresser, även om hela mailto-länkar."
+
+#: inc/settings.php:38
+#@ leejl
+msgid "Encode random parts to HTML entities"
+msgstr "Koda om slumpmässiga delar till HTML entities"
+
+#: inc/settings.php:39
+#@ leejl
+msgid "Encode with JavaScript"
+msgstr "Koda om till JavaScript"
+
+#: inc/admin.php:97
+#: inc/settings.php:47
+#@ leejl
+msgid "Message for JavaScript"
+msgstr "Meddelande för JavaScript"
+
+#: inc/settings.php:78
+#@ leejl
+msgid "Generate"
+msgstr "Generera"
+
+#: inc/activate-toolbox.php:115
+#@ leejl
+msgid "Unknown error"
+msgstr "Okänt fel"
+
+#: inc/activate-toolbox.php:124
+#, php-format
+#@ leejl
+msgid "Lucid Toolbox couldn't be activated, error message: %s"
+msgstr "Lucid Toolbox kunde inte aktiveras, felmeddelande: %s"
+
+#: inc/activate-toolbox.php:132
+#@ leejl
+msgid "Lucid Toolbox was activated successfully!"
+msgstr "Lucid Toolbox aktiverades utan problem!"
+
+#: inc/admin.php:33
+#@ leejl
+msgid "Lucid Toolbox is needed for Lucid Email Encoder to function properly."
+msgstr "Lucid Toolbox krävs för att Lucid Email Encoder ska fungera korrekt."
+
+#: inc/settings.php:62
+#@ leejl
+msgid "Output JavaScript and CSS for the message"
+msgstr "Använd JavaScript och CSS för meddelandet"
+
+#: inc/admin.php:100
+#: inc/settings.php:57
+#@ leejl
+msgid "Handle JavaScript message"
+msgstr "Hantera JavaScript-meddelande"
+
+#: inc/settings.php:70
+#@ leejl
+msgid "If the address is displayed in a place not filtered by Lucid Email Encoder, or if you want to include surrounding HTML, you can generate the necessary script here."
+msgstr "Om adressen visas på ett ställe som inte filtreras av Lucid Email Encoder, eller om du vill inkludera omkringliggande HTML, kan du generera skript här."
+
+#: inc/admin.php:94
+#: inc/settings.php:30
+#@ leejl
+msgid "Automatic filtering"
+msgstr "Automatisk filtrering"
+
+#: inc/admin.php:98
+#@ leejl
+msgid "If a message is set, it will be added before the email addresses if the JavaScript protection is selected. This requires handling in the theme's CSS or the option below, to show and hide when appropriate. The message is wrapped in <code>&lt;span class=\"email-hidden-message\"&gt;</code>"
+msgstr "Om ett meddelande anges kommer det läggas till innan e-postadresser, förutsatt att JavaScript-skyddet är valt. Detta kräver hantering i temats CSS, eller inställningen under, för att visa och dölja vid behov. Meddelandet omsluts av <code>&lt;span class=\"email-hidden-message\"&gt;</code>"
+
+#: inc/admin.php:106
+#@ leejl
+msgid "<strong>Will not work if there is a js-like class already</strong> (like some-js, js-here). A more robust way would be to add the class 'no-js' to the html element, add the CSS rule to the theme and use the snippet below in the &lt;head&gt; (preferably high up like below the title):"
+msgstr "<strong>Kommer inte fungera om det finns en js-liknande klass redan</strong> (som lite-js, js-here). En mer robust lösning är att lägga till klassen \"no-js\" på html-elementet, lägga till CSS-regeln i temat och använda kodsnutten nedan i &lt;head&gt; (helst långt upp som under title):"
+
+#: inc/admin.php:110
+#, php-format
+#@ leejl
+msgid "A third option, which is also very useful for theme development, is to use <a href=\"%s\" target=\"_blank\">Modernizr</a>."
+msgstr "Ett tredje alternativ, som även är väldigt användbart för tema-utveckling, är att använda <a href=\"%s\" target=\"_blank\">Modernizr</a>."
+
+#: inc/settings.php:24
+#@ leejl
+msgid "Email protection"
+msgstr "E-postskydd"
+
+#: inc/settings.php:25
+#@ leejl
+msgid "Read more about the options in the help tab on this page."
+msgstr "Läs mer om inställningarna i hjälp-fliken på denna sida."
+
+#: inc/settings.php:37
+#@ leejl
+msgctxt "Automatic filtering"
+msgid "None"
+msgstr "Ingen"
+
+#: inc/settings.php:51
+#@ leejl
+msgid "Wrapped in &lt;span class=\"email-hidden-message\"&gt;"
+msgstr "Omsluts av &lt;span class=\"email-hidden-message\"&gt;"
+
+#: inc/settings.php:69
+#@ leejl
+msgid "Manual script tags"
+msgstr "Manuella skript-taggar"
+
+#: inc/admin.php:95
+#@ leejl
+msgid "Choose if email addresses in certain content blocks should be filtered automatically. The default filters are <code>the_content</code>, <code>the_excerpt</code>, <code>widget_text</code>, <code>comment_text</code> and <code>comment_excerpt</code>. If disabled, the JavaScript decoding functions will still be available for manual use with the script generator."
+msgstr "Välj om e-postadresser i vissa innehållsblock ska filtreras automatiskt. Standardfilter är <code>the_content</code>, <code>the_excerpt</code>, <code>widget_text</code>, <code>comment_text</code> och <code>comment_excerpt</code>. Om det inaktiveras kommer avkodningsfunktionerna i JavaScript ändå vara tillgängliga för manuell användning med skriptgeneratorn."
+
+#: inc/admin.php:101
+#@ leejl
+msgid "If activated, a .js class will be added to the html element (as long as none is found) and a CSS rule will be inserted:"
+msgstr "Om det aktiveras kommer en .js-klass läggas till på html-elementet (förutsatt att ingen hittas) och en CSS-regel kommer läggas till:"
+
