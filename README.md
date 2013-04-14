@@ -8,7 +8,7 @@ A test by Silvan Mühlemann [comparing ways to obfuscate e-mail addresses](http:
 
 If you don't want a JavaScript dependency, entity encoding would change the above link to something like `<a href="mailto:&#104;&#105;&#64;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;m">Email me</a>`.
 
-**Requires [Lucid Toolbox](https://github.com/elusiveunit/Lucid-Toolbox)**, which is a plugin with a set of classes used to speed up and automate common tasks. This is kept as a separate plugin for easier development and updates. **This plugin will try to install and/or activate Lucid Toolbox** on plugin activation, if it's not available. It simply unzips a bundled version to the directory one level above its install location, if it's not there already, and runs `activate_plugin`.
+**Requires [Lucid Toolbox](https://github.com/elusiveunit/lucid-toolbox)**, which is a plugin with a set of classes used to speed up and automate common tasks. This is kept as a separate plugin for easier development and updates. **This plugin will try to install and/or activate Lucid Toolbox** on plugin activation, if it's not available. It simply unzips a bundled version to the directory one level above its install location, if it's not there already, and runs `activate_plugin`.
 
 Lucid Email Encoder is currently available in the following languages:
 

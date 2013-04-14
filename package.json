@@ -3,9 +3,13 @@
   "title": "Lucid Email Encoder",
   "description": "A WordPress plugin for encoding email addresses.",
   "version": "2.3.0",
-  "author": {
-    "name": "Jens Lindberg",
-    "url": "http://profiles.wordpress.org/elusiveunit/"
+  "author": "Jens Lindberg",
+  "homepage": "https://github.com/elusiveunit/lucid-email-encoder",
+  "bugs": "https://github.com/elusiveunit/lucid-email-encoder/issues",
+  "licence": "GPLv2 (or later)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elusiveunit/lucid-email-encoder.git"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
