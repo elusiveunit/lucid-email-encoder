@@ -8,7 +8,6 @@ README.txt
 *.rej
 *.swo
 *.swp
-*.zip
 *.vi
 *~
 *.sass-cache
