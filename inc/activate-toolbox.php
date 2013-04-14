@@ -65,11 +65,13 @@ class Lucid_Email_Encoder_Activate_Toolbox {
 	 * Plugin activation hook. Install and/or activate Lucid Toolbox if needed.
 	 */
 	public function plugin_activation() {
-		$active = get_option( 'active_plugins' );
+		$active = (array) get_option( 'active_plugins' );
+		$this->_find_toolbox( $active );
 
 		// Check if Lucid Toolbox is activated.
 		if ( ! in_array( $this->toolbox_basename, $active ) ) :
 			$installed = array_keys( get_plugins() );
+			$this->_find_toolbox( $installed );
 
 			if ( in_array( $this->toolbox_basename, $installed ) ) :
 				add_action( 'update_option_active_plugins', array( $this, 'activate_toolbox' ) );
@@ -77,6 +79,22 @@ class Lucid_Email_Encoder_Activate_Toolbox {
 				$this->_install_toolbox();
 			endif;
 		endif;
+	}
+
+	/**
+	 * Check for Lucid Toolbox plugin.
+	 *
+	 * The default basename may not pass since the plugin folder name can vary.
+	 * Only search for the main file instead and set that match, if found, as
+	 * the new basename for activate_toolbox().
+	 *
+	 * @param array $search Plugin names to search.
+	 */
+	protected function _find_toolbox( array $search ) {
+		foreach ( $search as $plugin ) :
+			if ( false !== strpos( $plugin, 'lucid-toolbox.php' ) )
+				$this->toolbox_basename = $plugin;
+		endforeach;
 	}
 
 	/**

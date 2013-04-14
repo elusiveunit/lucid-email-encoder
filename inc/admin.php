@@ -30,10 +30,21 @@ class Lucid_Email_Encoder_Admin {
 	 */
 	public function toolbox_notice() {
 		global $pagenow;
-		
-		if ( 'plugins.php' == $pagenow
-		  &&  ! is_plugin_active( 'lucid-toolbox/lucid-toolbox.php' ) )
-			printf( '<div class="error"><p>%s</p></div>', __( 'Lucid Toolbox is needed for Lucid Email Encoder to function properly.', 'leejl' ) );
+
+		if ( 'plugins.php' == $pagenow ) :
+			$active = (array) get_option( 'active_plugins' );
+			$toolbox_active = false;
+
+			// Don't check exact basename with is_plugin_active, since the folder
+			// name may vary.
+			foreach ( $active as $plugin ) :
+				if ( false !== strpos( $plugin, 'lucid-toolbox.php' ) )
+					$toolbox_active = true;
+			endforeach;
+
+			if ( ! $toolbox_active )
+				printf( '<div class="error"><p>%s</p></div>', __( 'Lucid Toolbox is needed for Lucid Email Encoder to function properly.', 'leejl' ) );
+		endif;
 	}
 
 	/**
