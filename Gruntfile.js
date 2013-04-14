@@ -55,14 +55,14 @@ module.exports = function(grunt) {
 			decoder: {
 				options: {
 					report: 'min',
-					banner: '/*! <%= pkg.title %> - Email decoding | build <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+					banner: '/*! <%= pkg.title %> <%= pkg.version %> - Email decoding */\n'
 				},
 				files: [{src: ['js/email-decoder.js'], dest: 'js/email-decoder.min.js'}]
 			},
 			generate: {
 				options: {
 					report: 'min',
-					banner: '/*! <%= pkg.title %> - Generate \'manual\' encoded strings | build <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+					banner: '/*! <%= pkg.title %> <%= pkg.version %> - Generate \'manual\' encoded strings */\n'
 				},
 				files: [{src: ['js/generate-script.js'], dest: 'js/generate-script.min.js'}]
 			}
