@@ -8,9 +8,9 @@
 
 /*
 Plugin Name: Lucid Email Encoder
+Plugin URI: https://github.com/elusiveunit/lucid-email-encoder
 Description: Encodes email addresses to HTML entities, or with ROT13 requiring JavaScript. Originally based on <em>Email Address Encoder</em> by Till Krüss.
 Author: Jens Lindberg
-Author URI: http://profiles.wordpress.org/elusiveunit/
 Version: 2.3.0
 */
 
