@@ -21,8 +21,11 @@ class Lucid_Email_Encoder_Admin {
 	 * Constructor, get options and add hooks.
 	 */
 	public function __construct() {
-		add_action( 'load-settings_page_leejl_settings', array( $this, 'add_settings_page_hooks' ) );
+		$basename = plugin_basename( Lucid_Email_Encoder_Core::$plugin_file );
+
 		add_action( 'admin_notices', array( $this, 'toolbox_notice' ) );
+		add_filter( "plugin_action_links_{$basename}", array( $this, 'add_action_links' ) );
+		add_action( 'load-settings_page_leejl_settings', array( $this, 'add_settings_page_hooks' ) );
 	}
 
 	/**
@@ -45,6 +48,29 @@ class Lucid_Email_Encoder_Admin {
 			if ( ! $toolbox_active )
 				printf( '<div class="error"><p>%s</p></div>', __( 'Lucid Toolbox is needed for Lucid Email Encoder to function properly.', 'leejl' ) );
 		endif;
+	}
+
+	/**
+	 * Add a settings page link to the plugin action links.
+	 *
+	 * @param array $links Default meta links.
+	 * @return array
+	 */
+	public function add_action_links( $links ) {
+
+		// Only add link if user have access to the page
+		if ( current_user_can( 'manage_options' ) ) :
+			$url = esc_attr( trailingslashit( get_admin_url() ) . 'options-general.php?page=leejl_settings' );
+
+			// Generally bad practice to rely on core strings, but I feel it's
+			// unlikely this is ever untranslated. If it happens, it's a simple
+			// update.
+			$text = __( 'Settings' );
+
+			$links['settings'] = "<a href=\"{$url}\">{$text}</a>";
+		endif;
+
+		return $links;
 	}
 
 	/**
