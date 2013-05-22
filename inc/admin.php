@@ -159,8 +159,7 @@ class Lucid_Email_Encoder_Admin {
 		ob_start(); ?>
 
 		<p><strong><?php _e( 'For more information:', 'leejl' ); ?></strong></p>
-		<p><a href="http://codex.wordpress.org/Media_Library_Screen" target="_blank"><?php _e( 'Documentation on Media Library', 'leejl' ); ?></a></p>
-		<p><a href="http://wordpress.org/support/" target="_blank"><?php _e( 'Support Forums', 'leejl' ); ?></a></p>
+		<p><a href="https://github.com/elusiveunit/lucid-email-encoder" target="_blank"><?php _e( 'Lucid Email Encoder on Github', 'leejl' ); ?></a></p>
 
 		<?php return ob_get_clean();
 	}
