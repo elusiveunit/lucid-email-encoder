@@ -1,18 +1,19 @@
 <?php
 /**
- * Lucid Email Encoder definition.
+ * Lucid Email Encoder plugin definition.
+ *
+ * Plugin Name: Lucid Email Encoder
+ * Plugin URI: https://github.com/elusiveunit/lucid-email-encoder
+ * Description: Encodes email addresses to HTML entities, or with ROT13 requiring JavaScript. Originally based on <em>Email Address Encoder</em> by Till Krüss.
+ * Author: Jens Lindberg
+ * Version: 2.3.0
+ * License: GPL-2.0+
+ * Text Domain: leejl
+ * Domain Path: /lang
  *
  * @package Lucid
  * @subpackage EmailEncoder
  */
-
-/*
-Plugin Name: Lucid Email Encoder
-Plugin URI: https://github.com/elusiveunit/lucid-email-encoder
-Description: Encodes email addresses to HTML entities, or with ROT13 requiring JavaScript. Originally based on <em>Email Address Encoder</em> by Till Krüss.
-Author: Jens Lindberg
-Version: 2.3.0
-*/
 
 // Block direct requests
 if ( ! defined( 'ABSPATH' ) ) die( 'Nope' );
