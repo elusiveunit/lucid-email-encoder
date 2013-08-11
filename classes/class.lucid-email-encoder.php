@@ -11,18 +11,32 @@ if ( ! defined( 'ABSPATH' ) ) die( 'Nope' );
 
 /**
  * Encode email addresses to protect them from harvesters.
- * 
+ *
  * @package Lucid
  * @subpackage EmailEncoder
  */
 class Lucid_Email_Encoder {
 
 	/**
+	 * HTML class name for the encoded address element.
+	 *
+	 * @var string
+	 */
+	private static $encoded_class = 'lucid-email-encoded';
+
+	/**
+	 * HTML class name for the element containing the no-JS message.
+	 *
+	 * @var string
+	 */
+	private static $message_class = 'email-hidden-message';
+
+	/**
 	 * Searches for email addresses in given $string and encodes them.
-	 * 
+	 *
 	 * Regular expression is based on based on John Gruber's Markdown.
 	 * http://daringfireball.net/projects/markdown/
-	 * 
+	 *
 	 * @param string $string Text with email addresses to encode.
 	 * @param bool $encode_to_script Output script tags with document.write.
 	 * @return string $string Given text with encoded email addresses
@@ -36,7 +50,7 @@ class Lucid_Email_Encoder {
 		$mailto_link_regex = apply_filters( 'leejl_mailto_regex', '(?:<a(?:.*?(?:href=(?:\s)?(?:"|\')mailto:).*?)<\/a>)' );
 
 		// Find an email address with an optional mailto: in front.
-		$email_adr_regex = apply_filters( 'leejl_email_regex', '(?:(?:mailto:)?(?:[-\!\#\$%\&\*\+\/=\?^_`\.\{\|\}~\w\x80-\xFF]+|".*?")\@(?:[-a-z0-9\x80-\xFF]+(?:\.[-a-z0-9\x80-\xFF]+)*\.[a-z]+|\[[\d.a-fA-F:]+\]))' );
+		$email_adr_regex = apply_filters( 'leejl_email_regex', '(?:(?:mailto:)?(?:[-\!\#\$%\&\*\+\/=\?\^_`\.\{\|\}~\w]+|".*?")\@(?:[-a-z0-9]+(?:\.[-a-z0-9]+)*\.[a-z]+|\[[\d.a-fA-F:]+\]))' );
 
 		// If searching for links, include href to find emails inside anchors
 		// without mailto, for later handling.
@@ -90,7 +104,7 @@ class Lucid_Email_Encoder {
 		$no_js_message = '';
 
 		if ( $no_js_text )
-			$no_js_message = '<span class="email-hidden-message">' . htmlspecialchars( $no_js_text ) . ' </span>';
+			$no_js_message = '<span class="' . self::$message_class . '">' . htmlspecialchars( $no_js_text ) . '</span>';
 
 		return $no_js_message;
 	}
@@ -104,15 +118,20 @@ class Lucid_Email_Encoder {
 	public static function encode_to_script( $string ) {
 		$no_js_message = self::get_message();
 
-		$email_script = '<script class="lucid-email-encoder">(function(){';
+		$email_script = '<span class="' . self::$encoded_class . '">';
+		$email_script .= self::get_message();
+		$email_script .= '<script>(function(){';
 		$email_script .= "var e='" . str_rot13( str_replace( '@', '£', $string ) ) . "';";
-		$email_script .= '}());</script>';
+		$email_script .= '}());</script></span>';
 
-		return $no_js_message . $email_script;
+		return $email_script;
 	}
 
 	/**
 	 * Split a string, encode random parts and return JavaScript that joins it.
+	 *
+	 * Older version that uses document.write. There is probably no use case for
+	 * it and it will most likely be removed in the future.
 	 *
 	 * @param string $string Text with email addresses to encode.
 	 * @return string Script tag with encoded text split for joining with
