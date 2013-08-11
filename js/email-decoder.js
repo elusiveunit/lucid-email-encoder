@@ -8,10 +8,11 @@ var lucidEmailEncoder = (function ( win, undefined ) {
 	var doc = win.document,
 	regex = {
 		encoded: /(var e=)[^;]+/,
-		html: /</,
 		href: /href=(?:"|')([^"']+)(?:"|')/,
 		text: /(?:\>)([^<]+)<\/a>/
-	};
+	},
+	encodedClass = 'lucid-email-encoded',
+	decodedClass = 'lucid-email-decoded';
 
 	/**
 	 * Perform the ROT13 transform on a character.
@@ -27,8 +28,9 @@ var lucidEmailEncoder = (function ( win, undefined ) {
 	 * Decode a lucid email script.
 	 *
 	 * @param {node} scriptNode Script node containing encoded string.
+	 * @param {node} parentNode Parent of script node.
 	 */
-	function decodeEmail( scriptNode ) {
+	function decodeEmail( scriptNode, parentNode ) {
 		var script, encoded, decoded, elem;
 
 		script = scriptNode.innerHTML.replace( /£/g, '@' );
@@ -36,29 +38,25 @@ var lucidEmailEncoder = (function ( win, undefined ) {
 		encoded = script.match( regex.encoded );
 		encoded = ( null !== encoded ) ? encoded[0] : '';
 
-		// Space needed for old IE
-		decoded = ' ' + encoded.substring( 7, encoded.length - 1 ).replace( /[A-Za-z]/g, leejlRot13 );
+		decoded = encoded.substring( 7, encoded.length - 1 ).replace( /[A-Za-z]/g, leejlRot13 );
 
-		// If decoded string has HTML, do innerHTML. Otherwise just create a text node
-		if ( regex.html.test( decoded ) ) {
-			elem = doc.createElement( 'span' );
-			elem.innerHTML = decoded;
-		} else {
-			elem = doc.createTextNode( decoded );
-		}
-
-		scriptNode.parentNode.insertBefore( elem, scriptNode );
+		// Replace the encoded content with the decoded address
+		parentNode.className = decodedClass;
+		parentNode.innerHTML = decoded;
 	}
 
 	/**
 	 * Decode all lucid email scripts.
 	 */
 	function decodeAll() {
-		var scripts = doc.body.getElementsByTagName( 'script' );
+		var scripts = doc.body.getElementsByTagName( 'script' ),
+		    parent;
 
 		for ( var i = scripts.length - 1; i >= 0; i-- ) {
-			if ( 'lucid-email-encoder' === scripts[i].className ) {
-				decodeEmail( scripts[i] );
+			parent = scripts[i].parentNode;
+
+			if ( scripts[i].parentNode.className === encodedClass ) {
+				decodeEmail( scripts[i], parent );
 			}
 		}
 	}
