@@ -19,15 +19,6 @@ Lucid Email Encoder is currently available in the following languages:
 
 Just install it and choose what protection to use. Defaults to HTML entities.
 
-## Frequently Asked Questions
-
-### My email addresses have spacing issues in old IE
-
-Yes, this is a problem to which I have found no solution. If using JavaScript protection, email addresses and mailto links surrounded by other text, such as in a regular paragraph, will have an extra space added to the end in IE 7 and 8. In IE7, there will also be a space missing before mailto links. Examples:
-
-* 'My email is hi@mysite.com, say hi!' will become 'My email is hi@mysite.com , say hi!'.
-* 'Here is a mailto [link](#).' will become 'Here is a mailto[link](#) .' in IE7 (same as above in IE8).
-
 ### How can I add filtering where there is none?
 
 There are several ways:
@@ -96,6 +87,12 @@ Regular expression used to find email addresses.
 
 ## Changelog
 
-### 2.3: Mar 27, 2013
+### 2.4.0: Aug 11, 2013
+
+* Tweak: Simplify wrapping elements and decoding approach for JavaScript decoding. Previously, addresses got encoded and wrapped in script tags, optionally with the no-JS message preceeding it (span + script). The decoded address was inserted before the script tag and js/no-js classes with CSS were required to handle the message. Everything is now wrapped in in a span and its content is simply replaced when decoded. This also seem to have fixed the IE spacing issues.
+* Tweak: The span CSS classes are now 'lucid-email-encoded' and 'lucid-email-decoded'.
+* Tweak: Remove non-ASCII matching range from regex... don't copy and paste without careful inspection kids!
+
+### 2.3.0: Mar 27, 2013
 
 * Initial public release.
