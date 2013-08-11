@@ -55,18 +55,6 @@ $leejl_settings->field(
 	)
 );
 
-$leejl_settings->field(
-	'no_js_handling',
-	__( 'Handle JavaScript message', 'leejl' ),
-	array(
-		'type' => 'checkbox',
-		'sanitize' => 'checkbox',
-		'section' => 'email_protection_section',
-		'inline_label' => __( 'Output JavaScript and CSS for the message', 'leejl' ),
-		'default' => 0
-	)
-);
-
 /* -Generator section
 -----------------------------------------------------------------------------*/
 $leejl_settings->section( 'manual_encoding_section', array(

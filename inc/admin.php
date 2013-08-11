@@ -135,19 +135,7 @@ class Lucid_Email_Encoder_Admin {
 		<p><?php _e( 'Choose if email addresses in certain content blocks should be filtered automatically. The default filters are <code>the_content</code>, <code>the_excerpt</code>, <code>widget_text</code>, <code>comment_text</code> and <code>comment_excerpt</code>. If disabled, the JavaScript decoding functions will still be available for manual use with the script generator.', 'leejl' ); ?></p>
 
 		<h3><?php _e( 'Message for JavaScript', 'leejl' ); ?></h3>
-		<p><?php _e( 'If a message is set, it will be added before the email addresses if the JavaScript protection is selected. This requires handling in the theme\'s CSS or the option below, to show and hide when appropriate. The message is wrapped in <code>&lt;span class="email-hidden-message"&gt;</code>', 'leejl' ); ?></p>
-
-		<h3><?php _e( 'Handle JavaScript message', 'leejl' ); ?></h3>
-		<p><?php _e( 'If activated, a .js class will be added to the html element (as long as none is found) and a CSS rule will be inserted:', 'leejl' ); ?></p>
-
-		<p><code>&lt;script&gt;(function(d){var c=d.className;c.match(/\bjs\b/)||(d.className=c+' js')}(document.documentElement));&lt;/script&gt;</code><br>
-		<code>&lt;style&gt;.js .email-hidden-message{display:none;visibility:hidden}&lt;/style&gt;</code></p>
-
-		<p><?php _e( '<strong>Will not work if there is a js-like class already</strong> (like some-js, js-here). A more robust way would be to add the class \'no-js\' to the html element, add the CSS rule to the theme and use the snippet below in the &lt;head&gt; (preferably high up like below the title):', 'leejl' ); ?></p>
-
-		<p><code>&lt;script&gt;(function(d){d.className=d.className.replace(/(\s|^)no-js(\s|$)/,'$1js$2')}(document.documentElement));&lt;/script&gt;</code></p>
-
-		<p><?php printf( __( 'A third option, which is also very useful for theme development, is to use <a href="%s" target="_blank">Modernizr</a>.', 'leejl' ), 'http://modernizr.com/' ); ?></p>
+		<p><?php _e( 'If a message is set, it will be added before the email addresses if the JavaScript protection is selected. The message is wrapped in <code>&lt;span class="email-hidden-message"&gt;</code>', 'leejl' ); ?></p>
 
 		<?php return ob_get_clean();
 	}
