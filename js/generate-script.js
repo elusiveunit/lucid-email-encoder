@@ -8,7 +8,8 @@ var lucidEmailEncoderScriptGenerator = (function ( win, $, undefined ) {
 		$generateField: $('#manual_generator'),
 		$generateButton: $('#manual_generator-button'),
 		$generateOutput: $('#leejl-generator-output')
-	};
+	},
+	scriptClass = 'lucid-email-encoded';
 
 	/**
 	 * Initialization.
@@ -50,7 +51,7 @@ var lucidEmailEncoderScriptGenerator = (function ( win, $, undefined ) {
 
 		text = text.replace( /@/g, '£' ).replace( /[A-Za-z]/g, leejlRot13 );
 
-		script = '<script class="lucid-email-encoder">(function(){var e=\'' + text + '\';}());</script>';
+		script = '<span class="' + scriptClass + '"><script>(function(){var e=\'' + text + '\';}());</script></span>';
 
 		elems.$generateOutput.text( script ).removeClass( 'hidden' );
 	}
