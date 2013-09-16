@@ -4,9 +4,9 @@ Automatically protect email addresses from harvesters with HTML entities or Java
 
 Originally based on [Email Address Encoder](http://wordpress.org/extend/plugins/email-address-encoder/) by Till Krüss, Lucid Email Encoder takes it a step further by also offering JavaScript encoding. The plugin automatically searches for email addresses and mailto links in content, comments and widgets, and converts them according to settings.
 
-A test by Silvan Mühlemann [comparing ways to obfuscate e-mail addresses](http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/), shows that ROT13 encryption offers strong protection. This plugin also converts the at sign (@) to a pound sign (£), to harden it further. A link like `<a href="mailto:hi@example.com">Email me</a>` would show up in the source as `<n uers="znvygb:uv£rknzcyr.pbz">Rznvy zr</n>`.
+A test by Silvan Mühlemann [comparing ways to obfuscate e-mail addresses](http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/), shows that ROT13 encryption offers strong protection. This plugin also converts the at sign (@) to a pound sign (£), to harden it further. A link like `<a href="mailto:hi@me.com">Say hi</a>` would show up in the source as `<n uers="znvygb:uv£zr.pbz">Fnl uv</n>`.
 
-If you don't want a JavaScript dependency, entity encoding would change the above link to something like `<a href="mailto:&#104;&#105;&#64;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;m">Email me</a>`.
+If you don't want a JavaScript dependency, entity encoding would change the above link to something like `<a href="&#x6d;&#x61;&#105;lto&#x3a;&#x68;&#x69;&#64;me&#x2e;&#x63;&#x6f;m">Say hi</a>`
 
 **Requires [Lucid Toolbox](https://github.com/elusiveunit/lucid-toolbox)**, which is a plugin with a set of classes used to speed up and automate common tasks. This is kept as a separate plugin for easier development and updates. **This plugin will try to install and/or activate Lucid Toolbox** on plugin activation, if it's not available. It simply unzips a bundled version to the directory one level above its install location, if it's not there already, and runs `activate_plugin`.
 
