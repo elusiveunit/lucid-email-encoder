@@ -43,11 +43,11 @@ class Lucid_Email_Encoder {
 	 */
 	public static function search_and_encode( $string, $encode_to_script = true ) {
 
-		// Abort if $string doesn't contain a @-sign.
+		// Abort if $string doesn't contain an @-sign.
 		if ( false === strpos( $string, '@' ) ) return $string;
 
 		// Find an anchor with 'href="mailto:' inside.
-		$mailto_link_regex = apply_filters( 'leejl_mailto_regex', '(?:<a(?:.*?(?:href=(?:\s)?(?:"|\')mailto:).*?)<\/a>)' );
+		$mailto_link_regex = apply_filters( 'leejl_mailto_regex', '(?:<a(?:[^>]*?(?:href=(?:\s)?(?:"|\')mailto:).*?)<\/a>)' );
 
 		// Find an email address with an optional mailto: in front.
 		$email_adr_regex = apply_filters( 'leejl_email_regex', '(?:(?:mailto:)?(?:[-\!\#\$%\&\*\+\/=\?\^_`\.\{\|\}~\w]+|".*?")\@(?:[-a-z0-9]+(?:\.[-a-z0-9]+)*\.[a-z]+|\[[\d.a-fA-F:]+\]))' );
