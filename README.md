@@ -87,6 +87,10 @@ Regular expression used to find email addresses.
 
 ## Changelog
 
+### 2.4.1: Sep 17, 2013
+
+* Fix: Change the dot (all) to 'anything but greater-than sign' in the mailto regex, to stop anchors not separated by a line break from getting included in the same block.
+
 ### 2.4.0: Aug 11, 2013
 
 * Tweak: Simplify wrapping elements and decoding approach for JavaScript decoding. Previously, addresses got encoded and wrapped in script tags, optionally with the no-JS message preceeding it (span + script). The decoded address was inserted before the script tag and js/no-js classes with CSS were required to handle the message. Everything is now wrapped in in a span and its content is simply replaced when decoded. This also seem to have fixed the IE spacing issues.
