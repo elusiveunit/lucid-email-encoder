@@ -10,5 +10,5 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
 	die();
 
-// Don't wanna clutter database with two options!
+// Don't wanna clutter the database with an option!
 delete_option( 'leejl_settings' );
