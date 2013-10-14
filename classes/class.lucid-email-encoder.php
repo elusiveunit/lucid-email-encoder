@@ -44,36 +44,101 @@ class Lucid_Email_Encoder {
 	/**
 	 * Searches for email addresses in given $string and encodes them.
 	 *
-	 * Regular expression is based on based on John Gruber's Markdown.
-	 * http://daringfireball.net/projects/markdown/
+	 * The character rules in the email regex is based on the RFC info summary
+	 * on {@link http://en.wikipedia.org/wiki/Email_address Wikipedia}. Some
+	 * technically valid formats, like quotes local parts, are ignored for
+	 * sanity's sake.
 	 *
 	 * @param string $string Text with email addresses to encode.
-	 * @param bool $encode_to_script Output script tags with document.write.
-	 * @return string $string Given text with encoded email addresses
+	 * @param bool $encode_to_script Encode with ROT13 and decode with
+	 *    JavaScript. If false, characters are encoded to hexadecimal entities.
+	 * @return string $string Given text with encoded email addresses.
 	 */
 	public static function search_and_encode( $string, $encode_to_script = true ) {
 
 		// Abort if $string doesn't contain an @-sign.
 		if ( false === strpos( $string, '@' ) ) return $string;
 
-		// Find an anchor with 'href="mailto:' inside.
-		$mailto_link_regex = apply_filters( 'leejl_mailto_regex', '(?:<a(?:[^>]*?(?:href=(?:\s)?(?:"|\')mailto:).*?)<\/a>)' );
+		self::$encode_to_script = (bool) $encode_to_script;
 
-		// Find an email address with an optional mailto: in front.
-		$email_adr_regex = apply_filters( 'leejl_email_regex', '(?:(?:mailto:)?(?:[-\!\#\$%\&\*\+\/=\?\^_`\.\{\|\}~\w]+|".*?")\@(?:[-a-z0-9]+(?:\.[-a-z0-9]+)*\.[a-z]+|\[[\d.a-fA-F:]+\]))' );
+		/*
+		 * Find an anchor with 'href="mailto:' inside.
+		 *
+		 * Compact version:
+		 * (?:<a(?:[^>]*?(?:\shref=(?:\s)*(?:"|\')mailto:).*?)<\/a>)
+		 */
+		$mailto_link_regex = apply_filters(
+			'leejl_mailto_regex',
+			'(?:
+				<a                 # Opening anchor tag
+					(?:
+						[^>]*?       # Optionally anything but a closing bracket
+						(?:
+							\s        # A space before the href
+							href=     # href attribute
+							(?:\s)*   # An optional number of spaces before the quote
+							(?:"|\')  # A quote character
+							mailto:   # mailto: after the quote
+						)
+						.*?          # Lazily match anything until the next match...
+					)
+				<\/a>              # ... which is the closing anchor tag
+			)'
+		);
 
-		// If searching for links, include href to find emails inside anchors
-		// without mailto, for later handling.
-		if ( $encode_to_script )
-			$email_adr_regex = '(href=")?' . $email_adr_regex;
+		/*
+		 * Find an email address with an optional mailto: in front.
+		 *
+		 * - If encoding to script, the mailto check is required so the attribute
+		 *   check below can match.
+		 * - For entity encoding, encoding the 'mailto' text is probably just as
+		 *   important as encoding the address itself, since it's an obvious
+		 *   keyword for harvesters to search for (at least I would've).
+		 *
+		 * Compact version (with a winking smiley built right in!):
+		 * (?:(?:mailto:)?[-.^!#$%&*+\/?`={}|~\w]+@(?:[-a-z0-9]+(?:\.[-a-z0-9]+)*\.[a-z]+|\[[\d.a-fA-F:]+\]))
+		 */
+		$email_adr_regex = apply_filters(
+			'leejl_email_regex',
+			'(?:
+
+				# Local part, first an optional mailto.
+				(?:mailto:)?
+
+				# One or more valid local part characters, excluding rules for
+				# quoting or backslashing which would make it far more complex.
+				[-.^!#$%&*+\/=?`{}|~\w]+
+
+				# The mighty @ symbol, ruler of all things email
+				@
+
+				# Domain part
+				(?:
+
+					# Valid domain characters in valid sequence.
+					[-a-z0-9]+(?:\.[-a-z0-9]+)*\.[a-z]+
+
+					# ...or...
+					|
+
+					# IP address surrounded by square brackets, loosly matching both
+					# IPv4 and IPv6.
+					\[[\d.a-fA-F:]+\]
+				)
+			)'
+		);
 
 		// If searching for links, find a mailto link or a plain email address.
+		// In addition, search for HTML attributes preceding the address and
+		// include it in a capture group. If this group includes a match, it will
+		// be skipped below.
 		if ( $encode_to_script ) :
-			$regex = "/{$mailto_link_regex}|{$email_adr_regex}/";
+			$email_adr_regex = '(\s[-a-z]+=["\'])?' . $email_adr_regex;
+			$regex = "/{$mailto_link_regex}|{$email_adr_regex}/xi";
 
 		// Otherwise just search for a plain email address.
 		else :
-			$regex = "/{$email_adr_regex}/";
+			$regex = "/{$email_adr_regex}/xi";
 		endif;
 
 		return preg_replace_callback( $regex, array( 'Lucid_Email_Encoder', 'replace_callback' ), $string );
