@@ -26,9 +26,9 @@ There are several ways:
 * Add an existing filter via `leejl_encoding_filters`, see 'Available hooks' section.
 * Call the encoding methods on a string:
 	* `Lucid_Email_Encoder::encode_to_script( 'My email: hi@mysite.com' );` for JavaScript.
-	* `Lucid_Email_Encoder::encode_string( 'My email: hi@mysite.com' );` for HTML entities. Note that `encode_string` ignores strings with HTML, since I'm not sure every browser handles HTML encoded as entities.
-	* `Lucid_Email_Encoder::search_and_encode( $some_content );` for when address(es) can be anywhere in a string and the entire string shouldn't be encoded. `search_and_encode` takes a second boolean parameter, which decides if it encodes to script (true, default) or entities (false).
-* Use the filters matching the encoding methods, listed under **Filter alternatives to encoding methods**.
+	* `Lucid_Email_Encoder::encode_string( 'My email: hi@mysite.com' );` for HTML entities. Note that `encode_string` ignores strings with HTML, since I'm not sure every browser handles HTML tags encoded as entities.
+	* `Lucid_Email_Encoder::search_and_encode( $some_content );` for when addresses can be anywhere in a string but the entire string shouldn't be encoded. `search_and_encode` takes a second boolean parameter, which decides if it encodes to script (true, default) or entities (false).
+* Use the filters matching the encoding methods, listed under *Filter alternatives to encoding methods*.
 * Use the script generator on the settings page to get an encoded snippet.
 
 ## Available hooks
@@ -81,11 +81,13 @@ If you want to change the regexes used for searching content, there are two filt
 
 **Filter alternatives to encoding methods**
 
+These are applied to content, rather than hooked into.
+
 * **lucid\_email\_encoder\_search**
 * **lucid\_email\_encoder\_script**
 * **lucid\_email\_encoder\_string**
 
-These can be applied to content as an alternative to directly calling `Lucid_Email_Encoder::[method]`. The benefit is that a `class_exists` check becomes unnecessary, while a drawback would be the small performance hit of a few extra function calls.
+They can be applied as an alternative to directly calling `Lucid_Email_Encoder::[method]`. The benefit is that a `class_exists` check becomes unnecessary, while a drawback would be the tiny performance hit of a few extra function calls.
 
 	echo apply_filters( 'lucid_email_encoder_search', $content_from_somewhere );
 
