@@ -24,7 +24,11 @@ Just install it and choose what protection to use. Defaults to HTML entities.
 There are several ways:
 
 * Add an existing filter via `leejl_encoding_filters`, see 'Available hooks' section.
-* Call the encoding function on a string: `Lucid_Email_Encoder::encode_to_script( 'My email: hi@mysite.com' );` for JavaScript or `Lucid_Email_Encoder::encode_string( 'My email: hi@mysite.com' );` for HTML entities. Note that `encode_string` ignores strings with HTML, since I'm not sure every browser handles HTML encoded as entities.
+* Call the encoding methods on a string:
+	* `Lucid_Email_Encoder::encode_to_script( 'My email: hi@mysite.com' );` for JavaScript.
+	* `Lucid_Email_Encoder::encode_string( 'My email: hi@mysite.com' );` for HTML entities. Note that `encode_string` ignores strings with HTML, since I'm not sure every browser handles HTML encoded as entities.
+	* `Lucid_Email_Encoder::search_and_encode( $some_content );` for when address(es) can be anywhere in a string and the entire string shouldn't be encoded. `search_and_encode` takes a second boolean parameter, which decides if it encodes to script (true, default) or entities (false).
+* Use the filters matching the encoding methods, listed under **Filter alternatives to encoding methods**.
 * Use the script generator on the settings page to get an encoded snippet.
 
 ## Available hooks
@@ -53,26 +57,14 @@ To replace the filter list, return your own array:
 
 -----
 
-**leejl\_mailto\_regex**
+**Regex filters**
 
-Regular expression used to find mailto links.
+If you want to change the regexes used for searching content, there are two filters:
 
-	/**
-	 * Change the regular expression for mailto links in Lucid Email Encoder.
-	 *
-	 * @param string $regex Default regular expression.
-	 * @return string
-	 */
-	function prefix_mailto_regex( $regex ) {
-		return '/My custom regex/';
-	}
-	add_filter( 'leejl_mailto_regex', 'prefix_mailto_regex' );
+* **leejl\_mailto\_regex**, used to find mailto links.
+* **leejl\_email\_regex**, used to find email addresses.
 
------
-
-**leejl\_email\_regex**
-
-Regular expression used to find email addresses.
+**Don't include delimiters** in your versions; the regexes must be combinable. Forward slashes (`/`) are used as delimiters, so escape them if they're used.
 
 	/**
 	 * Change the regular expression for email addresses in Lucid Email Encoder.
@@ -80,12 +72,34 @@ Regular expression used to find email addresses.
 	 * @param string $regex Default regular expression.
 	 * @return string
 	 */
-	function prefix_email_regex( $regex ) {
-		return '/My custom regex/';
+	function prefix_mailto_regex( $regex ) {
+		return 'My custom slash \/ regex';
 	}
-	add_filter( 'leejl_email_regex', 'prefix_email_regex' );
+	add_filter( 'leejl_email_regex', 'prefix_mailto_regex' );
+
+-----
+
+**Filter alternatives to encoding methods**
+
+* **lucid\_email\_encoder\_search**
+* **lucid\_email\_encoder\_script**
+* **lucid\_email\_encoder\_string**
+
+These can be applied to content as an alternative to directly calling `Lucid_Email_Encoder::[method]`. The benefit is that a `class_exists` check becomes unnecessary, while a drawback would be the small performance hit of a few extra function calls.
+
+	echo apply_filters( 'lucid_email_encoder_search', $content_from_somewhere );
+
+	<p>Some content with a mailto <?php echo apply_filters( 'lucid_email_encoder_script', '<a href="mailto:hi@me.com">link</a>' ); ?></p>
+
+	<p>Some content with a mailto <a href="<?php echo apply_filters( 'lucid_email_encoder_string', 'mailto:hi@me.com' ); ?>">link</a></p>
 
 ## Changelog
+
+### 2.5.0: Oct 14, 2013
+
+* New: Add filters matching the encoding methods: `lucid_email_encoder_search`, `lucid_email_encoder_script` and `lucid_email_encoder_string`.
+* Tweak: Thoroughly walk through and tweak the regexes. They are now expanded with comments, more robust and generally cleaned up.
+* Tweak: The regexes now use the **i** (which should've been included right from the start) and **x** (because of the change above) flags. Read more about the flags in the [PHP manual](http://php.net/manual/en/reference.pcre.pattern.modifiers.php), if you're unfamiliar with them.
 
 ### 2.4.1: Sep 17, 2013
 
