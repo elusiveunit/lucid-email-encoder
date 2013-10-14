@@ -32,6 +32,16 @@ class Lucid_Email_Encoder {
 	private static $message_class = 'email-hidden-message';
 
 	/**
+	 * If addresses should be encoded to JavaScript ROT13.
+	 *
+	 * Simply used as a way to pass the search_and_encode param to the regex
+	 * replace callback.
+	 *
+	 * @var bool
+	 */
+	private static $encode_to_script = true;
+
+	/**
 	 * Searches for email addresses in given $string and encodes them.
 	 *
 	 * Regular expression is based on based on John Gruber's Markdown.
@@ -66,29 +76,30 @@ class Lucid_Email_Encoder {
 			$regex = "/{$email_adr_regex}/";
 		endif;
 
-		// Simpler entity encoding can jump straight to encode_string
-		if ( $encode_to_script )
-			$method = 'Lucid_Email_Encoder::encode_to_script( $matches[0] )';
+		return preg_replace_callback( $regex, array( 'Lucid_Email_Encoder', 'replace_callback' ), $string );
+	}
+
+	/**
+	 * Run an encoding function on email address matches.
+	 *
+	 * Callback for preg_replace_callback in search_and_encode.
+	 *
+	 * Having a match in the first position means the attribute capture group
+	 * got filled, so the address is in an attribute. Adding script tags inside
+	 * attributes will break things, so we'll just return the original match.
+	 *
+	 * @see search_and_encode()
+	 * @param array $matches Regex matches from preg_replace_callback.
+	 * @return string The replacement for the match.
+	 */
+	public static function replace_callback( $matches ) {
+		if ( isset( $matches[1] ) )
+			return $matches[0];
+
+		if ( self::$encode_to_script )
+			return Lucid_Email_Encoder::encode_to_script( $matches[0] );
 		else
-			$method = 'Lucid_Email_Encoder::encode_string( $matches[0], false )';
-
-		return preg_replace_callback(
-			$regex,
-
-			// In case there is a link with href="hi@example.com", that particular
-			// email address won't get encoded, since we don't want script tags
-			// inside attributes breaking the HTML.
-			create_function(
-				'$matches',
-				'if ( isset( $matches[1] )
-				   && false !== strpos( $matches[1], "href" ) ) :
-					return $matches[0];
-				endif;
-
-				return ' . $method . ';'
-			),
-			$string
-		);
+			return Lucid_Email_Encoder::encode_string( $matches[0], false );
 	}
 
 	/**
