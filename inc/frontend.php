@@ -36,15 +36,14 @@ class Lucid_Email_Encoder_Frontend {
 		add_action( 'wp_footer', array( $this, 'decode_all' ) );
 
 		// Don't do anything if encoding is disabled
-		if ( 'entities' == $encode_emails || 'script' == $encode_emails ) :
-			add_action( 'wp_head', array( $this, 'encode_emails' ) );
-		endif;
+		if ( 'entities' == $encode_emails || 'script' == $encode_emails )
+			$this->add_encoding_filters();
 	}
 
 	/**
 	 * Encode email addresses to protect them from harvesters.
 	 */
-	public function encode_emails() {
+	public function add_encoding_filters() {
 		$filters = apply_filters( 'leejl_encoding_filters', array(
 			'the_content',
 			'the_excerpt',
@@ -53,9 +52,14 @@ class Lucid_Email_Encoder_Frontend {
 			'comment_excerpt'
 		) );
 
-		foreach ( $filters as $key => $filter ) :
+		// Custom filter should always be available
+		$filters[] = 'lucid_email_encoder_search';
+
+		foreach ( $filters as $key => $filter )
 			add_filter( $filter, array( $this, 'encode_callback' ), 999 );
-		endforeach;
+
+		add_filter( 'lucid_email_encoder_script', array( 'Lucid_Email_Encoder', 'encode_to_script' ), 999 );
+		add_filter( 'lucid_email_encoder_string', array( 'Lucid_Email_Encoder', 'encode_string' ), 999 );
 	}
 
 	/**
