@@ -18,16 +18,23 @@
 // Block direct requests
 if ( ! defined( 'ABSPATH' ) ) die( 'Nope' );
 
+// Symlink workaround, see http://core.trac.wordpress.org/ticket/16953
+$leejl_plugin_file = __FILE__;
+if ( isset( $plugin ) )
+	$leejl_plugin_file = $plugin;
+elseif ( isset( $network_plugin ) )
+	$leejl_plugin_file = $network_plugin;
+
 // Plugin constants
 if ( ! defined( 'LEEJL_VERSION' ) )
-	define( 'LEEJL_VERSION', '2.5.0' );
+	define( 'LEEJL_VERSION', '2.5.1' );
 
 if ( ! defined( 'LEEJL_PLUGIN_URL' ) )
-	define( 'LEEJL_PLUGIN_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
+	define( 'LEEJL_PLUGIN_URL', trailingslashit( plugin_dir_url( $leejl_plugin_file ) ) );
 
 if ( ! defined( 'LEEJL_PLUGIN_PATH' ) )
-	define( 'LEEJL_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+	define( 'LEEJL_PLUGIN_PATH', trailingslashit( plugin_dir_path( $leejl_plugin_file ) ) );
 
 // Load and initialize the plugin parts
 require LEEJL_PLUGIN_PATH . 'inc/core.php';
-$lucid_email_encoder_core = new Lucid_Email_Encoder_Core( __FILE__ );
+$lucid_email_encoder_core = new Lucid_Email_Encoder_Core( $leejl_plugin_file );
