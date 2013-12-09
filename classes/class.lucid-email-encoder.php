@@ -70,19 +70,19 @@ class Lucid_Email_Encoder {
 		$mailto_link_regex = apply_filters(
 			'leejl_mailto_regex',
 			'(?:
-				<a                 # Opening anchor tag
-					(?:
-						[^>]*?       # Optionally anything but a closing bracket
-						(?:
-							\s        # A space before the href
-							href=     # href attribute
-							(?:\s)*   # An optional number of spaces before the quote
-							(?:"|\')  # A quote character
-							mailto:   # mailto: after the quote
-						)
-						.*?          # Lazily match anything until the next match...
-					)
-				<\/a>              # ... which is the closing anchor tag
+			  <a              # Opening anchor tag
+			    (?:
+			      [^>]*?      # Optionally anything but a closing bracket
+			      (?:
+			        \s        # A space before the href
+			        href=     # href attribute
+			        (?:\s)*   # An optional number of spaces before the quote
+			        (?:"|\')  # A quote character
+			        mailto:   # mailto: after the quote
+			      )
+			      .*?         # Lazily match anything until the next match...
+			    )
+			  <\/a>           # ... which is the closing anchor tag
 			)'
 		);
 
