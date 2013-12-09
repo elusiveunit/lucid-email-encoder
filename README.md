@@ -97,6 +97,10 @@ They can be applied as an alternative to directly calling `Lucid_Email_Encoder::
 
 ## Changelog
 
+### 2.5.1: Dec 09, 2013
+
+* Tweak/fix: Include [this](https://gist.github.com/aubreypwd/7828624) temporary workaround for the issue with `__FILE__` in symlinked plugins, see [trac ticket #16953](http://core.trac.wordpress.org/ticket/16953).
+
 ### 2.5.0: Oct 14, 2013
 
 * New: Add filters matching the encoding methods: `lucid_email_encoder_search`, `lucid_email_encoder_script` and `lucid_email_encoder_string`.
