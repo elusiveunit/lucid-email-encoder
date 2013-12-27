@@ -2,8 +2,7 @@
 /**
  * Email encoder class definition.
  *
- * @package Lucid
- * @subpackage EmailEncoder
+ * @package Lucid\EmailEncoder
  */
 
 // Block direct requests
@@ -12,8 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) die( 'Nope' );
 /**
  * Encode email addresses to protect them from harvesters.
  *
- * @package Lucid
- * @subpackage EmailEncoder
+ * @package Lucid\EmailEncoder
  */
 class Lucid_Email_Encoder {
 

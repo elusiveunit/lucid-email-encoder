@@ -2,8 +2,7 @@
 /**
  * Lucid Toolbox activation.
  *
- * @package Lucid
- * @subpackage EmailEncoder
+ * @package Lucid\EmailEncoder
  */
 
 // Block direct requests
@@ -12,8 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) die( 'Nope' );
 /**
  * Tries to install and/or activate Lucid Toolbox if it's not available.
  *
- * @package Lucid
- * @subpackage EmailEncoder
+ * @package Lucid\EmailEncoder
  */
 class Lucid_Email_Encoder_Activate_Toolbox {
 

@@ -2,8 +2,7 @@
 /**
  * Admin filters.
  *
- * @package Lucid
- * @subpackage EmailEncoder
+ * @package Lucid\EmailEncoder
  */
 
 // Block direct requests
@@ -12,8 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) die( 'Nope' );
 /**
  * Loads some misc. functionality like scripts and styles.
  *
- * @package Lucid
- * @subpackage EmailEncoder
+ * @package Lucid\EmailEncoder
  */
 class Lucid_Email_Encoder_Admin {
 
@@ -30,6 +28,8 @@ class Lucid_Email_Encoder_Admin {
 
 	/**
 	 * Show a notice if Lucid Toolbox isn't activated.
+	 *
+	 * @global string $pagenow Current admin page.
 	 */
 	public function toolbox_notice() {
 		global $pagenow;

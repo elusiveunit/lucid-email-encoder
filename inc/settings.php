@@ -2,8 +2,7 @@
 /**
  * Plugin settings.
  *
- * @package Lucid
- * @subpackage EmailEncoder
+ * @package Lucid\EmailEncoder
  */
 
 // Block direct requests

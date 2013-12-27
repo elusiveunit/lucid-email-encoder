@@ -2,8 +2,7 @@
 /**
  * Fired when the plugin is uninstalled. Deletes options.
  *
- * @package Lucid
- * @subpackage EmailEncoder
+ * @package Lucid\EmailEncoder
  */
 
 // Exit if the uninstall is not called from WordPress

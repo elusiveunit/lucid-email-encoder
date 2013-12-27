@@ -11,8 +11,7 @@
  * Text Domain: leejl
  * Domain Path: /lang
  *
- * @package Lucid
- * @subpackage EmailEncoder
+ * @package Lucid\EmailEncoder
  */
 
 // Block direct requests
