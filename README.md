@@ -1,4 +1,6 @@
-# Lucid Email Encoder [![devDependency Status](https://david-dm.org/elusiveunit/lucid-email-encoder/dev-status.svg)](https://david-dm.org/elusiveunit/lucid-email-encoder#info=devDependencies)
+# Lucid Email Encoder
+
+[![devDependency Status](https://david-dm.org/elusiveunit/lucid-email-encoder/dev-status.svg)](https://david-dm.org/elusiveunit/lucid-email-encoder#info=devDependencies)
 
 Automatically protect email addresses from harvesters with HTML entities or JavaScript.
 
