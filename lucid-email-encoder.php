@@ -17,25 +17,16 @@
 // Block direct requests
 if ( ! defined( 'ABSPATH' ) ) die( 'Nope' );
 
-// Symlink workaround, see http://core.trac.wordpress.org/ticket/16953
-// The root check is to stop a fatal error on activation
-$leejl_plugin_file = __FILE__;
-$leejl_document_root = str_replace( array( '\\', '/' ), DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'] );
-if ( isset( $plugin ) && false !== strpos( $plugin, $leejl_document_root ) )
-	$leejl_plugin_file = $plugin;
-elseif ( isset( $network_plugin ) && false !== strpos( $network_plugin, $leejl_document_root ) )
-	$leejl_plugin_file = $network_plugin;
-
 // Plugin constants
 if ( ! defined( 'LEEJL_VERSION' ) )
-	define( 'LEEJL_VERSION', '2.5.1' );
+	define( 'LEEJL_VERSION', '2.5.2' );
 
 if ( ! defined( 'LEEJL_PLUGIN_URL' ) )
-	define( 'LEEJL_PLUGIN_URL', trailingslashit( plugin_dir_url( $leejl_plugin_file ) ) );
+	define( 'LEEJL_PLUGIN_URL', trailingslashit( plugin_dir_url( __FILE__ ) ) );
 
 if ( ! defined( 'LEEJL_PLUGIN_PATH' ) )
-	define( 'LEEJL_PLUGIN_PATH', trailingslashit( plugin_dir_path( $leejl_plugin_file ) ) );
+	define( 'LEEJL_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 
 // Load and initialize the plugin parts
 require LEEJL_PLUGIN_PATH . 'inc/core.php';
-$lucid_email_encoder_core = new Lucid_Email_Encoder_Core( $leejl_plugin_file );
+$lucid_email_encoder_core = new Lucid_Email_Encoder_Core( __FILE__ );
