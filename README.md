@@ -99,6 +99,10 @@ They can be applied as an alternative to directly calling `Lucid_Email_Encoder::
 
 ## Changelog
 
+### 2.5.2: Feb 18, 2015
+
+* Remove: The workaround for `__FILE__` in symlinked plugins is no longer needed as of WordPress 3.9.
+
 ### 2.5.1: Dec 09, 2013
 
 * Tweak/fix: Include [this](https://gist.github.com/aubreypwd/7828624) temporary workaround for the issue with `__FILE__` in symlinked plugins, see [trac ticket #16953](http://core.trac.wordpress.org/ticket/16953).
