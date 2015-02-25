@@ -82,7 +82,7 @@ class Lucid_Email_Encoder_Core {
 		elseif ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) :
 
 			// Encoder class
-			require LEEJL_PLUGIN_PATH . 'classes/class.lucid-email-encoder.php';
+			require LEEJL_PLUGIN_PATH . 'classes/lucid-email-encoder.php';
 
 			// Frontend
 			require LEEJL_PLUGIN_PATH . 'inc/frontend.php';
