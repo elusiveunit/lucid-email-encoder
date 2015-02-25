@@ -36,22 +36,9 @@ class Lucid_Email_Encoder_Core {
 	 */
 	public function __construct( $file ) {
 		self::$plugin_file = $file;
-		$this->_load_toolbox();
 
 		add_action( 'init', array( $this, 'load_translation' ), 1 );
 		add_action( 'init', array( $this, 'load_plugin_parts' ) );
-	}
-
-	/**
-	 * Activate Lucid Toolbox if needed.
-	 */
-	private function _load_toolbox() {
-
-		// Only load in admin.
-		if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) :
-			require LEEJL_PLUGIN_PATH . 'inc/activate-toolbox.php';
-			new Lucid_Email_Encoder_Activate_Toolbox( self::$plugin_file );
-		endif;
 	}
 
 	/**
