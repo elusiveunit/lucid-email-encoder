@@ -132,7 +132,7 @@ class Lucid_Email_Encoder {
 		// be skipped below.
 		if ( $encode_to_script ) :
 			$email_adr_regex = '(\s[-a-z]+=["\'])?' . $email_adr_regex;
-			$regex = "/{$mailto_link_regex}|{$email_adr_regex}/xi";
+			$regex = "/{$mailto_link_regex}|{$email_adr_regex}/xis";
 
 		// Otherwise just search for a plain email address.
 		else :
