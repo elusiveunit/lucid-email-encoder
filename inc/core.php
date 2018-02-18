@@ -60,6 +60,7 @@ class Lucid_Email_Encoder_Core {
 
 			// Settings
 			require LEEJL_PLUGIN_PATH . 'inc/settings.php';
+			self::$_instances['settings'] = new Lucid_Email_Encoder_Settings();
 
 			// General admin
 			require LEEJL_PLUGIN_PATH . 'inc/admin.php';
