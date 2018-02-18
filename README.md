@@ -99,6 +99,10 @@ They can be applied as an alternative to directly calling `Lucid_Email_Encoder::
 
 ## Changelog
 
+### 2.5.4: Feb 18, 2018
+
+* Fix: Use the correct textdomain for a message.
+
 ### 2.5.3: Sep 20, 2015
 
 * Tweak: Add the `PCRE_DOTALL` (`s`) flag to properly capture links with line breaks in them.
