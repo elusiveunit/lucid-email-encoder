@@ -35,7 +35,7 @@ class Lucid_Email_Encoder_Admin {
 		global $pagenow;
 
 		if ( 'plugins.php' == $pagenow && ! defined( 'LUCID_TOOLBOX_VERSION' ) )
-			printf( '<div class="error"><p>%s</p></div>', __( 'Lucid Toolbox is needed for Lucid Email Encoder to function properly.', 'lucid-slider' ) );
+			printf( '<div class="error"><p>%s</p></div>', __( 'Lucid Toolbox is needed for Lucid Email Encoder to function properly.', 'leejl' ) );
 	}
 
 	/**
