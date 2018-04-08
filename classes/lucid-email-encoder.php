@@ -195,7 +195,7 @@ class Lucid_Email_Encoder {
 		$email_script = '<span class="' . self::$encoded_class . '">';
 		$email_script .= self::get_message();
 		$email_script .= '<script>(function(){';
-		$email_script .= "var e='" . str_rot13( str_replace( '@', '£', $string ) ) . "';";
+		$email_script .= "var e='" . str_rot13( str_replace( array( '@', "\n" ), array( '£', '' ), $string ) ) . "';";
 		$email_script .= '}());</script></span>';
 
 		return $email_script;
