@@ -99,6 +99,10 @@ They can be applied as an alternative to directly calling `Lucid_Email_Encoder::
 
 ## Changelog
 
+### 2.5.5: Apr 08, 2018
+
+* Fix: Remove newlines from multiline instances to prevent unterminated string literals.
+
 ### 2.5.4: Feb 18, 2018
 
 * Fix: Use the correct textdomain for a message.
